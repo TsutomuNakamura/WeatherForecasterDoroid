@@ -9,7 +9,7 @@ Android のウィジェットでドロイド君が気象予報をしてくれる
 #* Version  
 0.1
 
-# セットアップはどうすれば良い？ #
+# セットアップについて
 ## とりあえずソースコードがほしい場合
 ソースコードはgit リポジトリで管理されています。
 とりあえずソースコードのみほしい場合は次のコマンドでサンプルソースコードを取得することができます。
@@ -54,7 +54,7 @@ WorldWeatherOnline の場合は5 日まで表示できるので、そのよう�
 余裕のある人は、GPS の機能を追加するなどしてもらう。
 よほど余裕がある人向け
 
-## その他
-####書き方について(備忘録) 
-このWiki はmarkdown 書式に対応しています。  
-[markdown書式について](http://daringfireball.net/projects/markdown/)
+## 気象予報情報の取得先について
+WORLD WEATHER ONLINE
+ http://www.worldweatheronline.com/
+
