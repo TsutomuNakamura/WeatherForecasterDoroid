@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<properties>
+	<comment>m_country に関するsql</comment>
+	<!-- テーブルの作成 -->
+	<entry key="sql_create_table">
+		CREATE TABLE IF NOT EXISTS m_country(
+			id INTEGER PRIMARY KEY AUTOINCREMENT
+			, country_name_code TEXT NOT NULL UNIQUE
+			, country_name TEXT NOT NULL UNIQUE
+			, update_date TEXT
+			, registration_date TEXT
+		);
+	</entry>
+	
+	<!-- 海外国名一覧の取得 -->
+	<entry key="sql_select_c_n_by_ex_c_n_code">
+		SELECT
+			MC.country_name_code, MC.country_name 
+		FROM
+			m_country MC
+		WHERE
+			NOT MC.country_name_code = ?
+	</entry>
+	
+	<!-- データ挿入 -->
+	<entry key="sql_insert_table">
+	    INSERT INTO m_country(
+	    	id, country_name_code, country_name, update_date, registration_date
+	    ) VALUES (
+	    	?, ?, ?, ?, ?
+	    );
+	</entry>
+	
+	<!-- テーブルの削除 -->
+	<entry key="sql_drop_table">
+		DROP TABLE IF EXISTS m_country;
+	</entry>
+	
+	<!-- テーブルのレコード数カウント -->
+	<entry>
+	    COUNT(*) FROM m_country;
+	</entry>
+</properties>

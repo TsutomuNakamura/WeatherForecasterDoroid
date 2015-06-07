@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical" android:layout_width="fill_parent"
+	android:layout_height="fill_parent">
+    
+    <TextView
+    		android:id="@+id/WholeOfCountryCommentLabel"
+    		android:layout_width="wrap_content"
+    		android:layout_height="wrap_content"
+    		android:textSize="22sp"
+    		android:text="■全国の気象解説"
+    />
+    <TextView
+    		android:id="@+id/WholeOfCountryCommentPubDate"
+    		android:layout_width="wrap_content"
+    		android:layout_height="wrap_content"
+    		android:textSize="14sp"
+    />
+    <TextView
+    		android:id="@+id/WholeOfCountryComment"
+    		android:layout_width="wrap_content"
+    		android:layout_height="wrap_content"
+    		android:textSize="18sp"
+    />
+    
+    <View android:id="@+id/Separator" 
+			android:layout_width="wrap_content" 
+			android:layout_height="1px"
+			android:background="#414141" 
+			android:layout_marginBottom="1dip"
+    />
+    
+    <TextView
+    		android:id="@+id/AdministrativeAreaCommentLabel"
+    		android:layout_width="wrap_content"
+    		android:layout_height="wrap_content"
+    		android:textSize="22sp"
+    />
+    <TextView
+        	android:id="@+id/AdministrativeAreaCommentPubDate"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:textSize="14sp"
+    />
+    <TextView
+    		android:id="@+id/AdministrativeAreaComment"
+    		android:layout_width="wrap_content"
+    		android:layout_height="wrap_content"
+    		android:textSize="18sp"
+    />
+</LinearLayout>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<properties>
+	<comment>t_woc_weather_comment に関するsql</comment>
+	<!-- テーブルの作成 -->
+	<entry key="sql_create_table">
+		CREATE TABLE IF NOT EXISTS t_woc_weather_comment (
+			country_id INTEGER PRIMARY KEY
+			, announce_date TEXT
+			, weather_comment TEXT
+			, update_date TEXT
+			, registration_date TEXT
+			, FOREIGN KEY (country_id) REFERENCES m_country (id)
+		);
+	</entry>
+	
+	<entry key="sql_ins_or_rep_table">
+		INSERT OR REPLACE INTO t_woc_weather_comment(
+			country_id, announce_date, weather_comment
+			, update_date, registration_date
+		) VALUES (
+			(SELECT id FROM m_country WHERE country_name_code = ?)
+			, ?, ?, ?, ?
+		);
+	</entry>
+	
+	<!-- テーブルの削除 -->
+	<entry key="sql_drop_table">
+		DROP TABLE IF EXISTS t_woc_weather_comment;
+	</entry>
+</properties>

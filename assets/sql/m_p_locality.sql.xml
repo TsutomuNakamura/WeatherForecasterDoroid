@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<properties>
+	<comment>m_p_locality に関するsql</comment>
+	<!-- テーブルの作成 -->
+	<entry key="sql_create_table">
+		CREATE TABLE IF NOT EXISTS m_p_locality(
+			id INTEGER PRIMARY KEY AUTOINCREMENT
+			, parent_administrative_area_id INTEGER NOT NULL
+			, parent_sub_administrative_area_id INTEGER
+			, latitude REAL NOT NULL
+			, longitude REAL NOT NULL
+			, locality_name TEXT NOT NULL
+			, v_locality_name TEXT NOT NULL
+			, rss_url TEXT NOT NULL
+			, update_date TEXT
+			, registration_date TEXT
+			, FOREIGN KEY (parent_administrative_area_id) REFERENCES m_p_administrative_area (id)
+			, FOREIGN KEY (parent_sub_administrative_area_id) REFERENCES m_p_sub_administrative_area (id)
+		);
+	</entry>
+	
+	<entry key="sql_insert_table">
+		INSERT INTO m_p_locality(
+			id, parent_administrative_area_id, parent_sub_administrative_area_id
+			, latitude, longitude, locality_name
+			, v_locality_name, rss_url, update_date
+			, registration_date
+		) VALUES (
+			?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+		);
+	</entry>
+	
+	<!-- テーブルの削除 -->
+	<entry key="sql_drop_table">
+		DROP TABLE IF EXISTS m_p_locality;
+	</entry>
+	
+	<!-- テーブルのレコード数カウント -->
+	<entry>
+	    COUNT(*) FROM m_p_locality;
+	</entry>
+</properties>	

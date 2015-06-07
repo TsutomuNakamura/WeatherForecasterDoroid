@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<properties>
+	<comment>t_widget_locale_history に関するsql</comment>
+	<!-- テーブルの作成 -->
+	<entry key="sql_create_table">
+		CREATE TABLE IF NOT EXISTS t_widget_locale_history(
+			widget_id INTEGER PRIMARY KEY
+			, json_id TEXT
+			, update_count INTEGER NOT NULL
+			, gps_flag INTEGER
+			, latitude REAL NOT NULL
+			, longitude REAL NOT NULL
+			, accuracy INTEGER
+			, country_name_code_id INTEGER
+			, administrative_area_name_id INTEGER
+			, sub_administrative_area_name TEXT
+			, locality_name TEXT
+			, update_date TEXT
+			, registration_date TEXT
+		);
+	</entry>
+	
+	<!-- データ挿入 -->
+	<entry key="sql_insert_table">
+		INSERT OR REPLACE INTO t_widget_locale_history(
+			widget_id, json_id, update_count
+			, gps_flag, latitude, longitude
+			, accuracy, country_name_code_id, administrative_area_name_id
+			, sub_administrative_area_name, locality_name, update_date
+			, registration_date
+		) VALUES (
+			?, ?, ?, ?, ?, ?, ?
+			, (SELECT id FROM m_country WHERE country_name_code = ?)
+			, (SELECT id FROM m_p_administrative_area WHERE administrative_area_name = ?)
+			, ?, ?, ?, ?
+		);
+	</entry>
+	<!-- WidgetIDを指定して、ウィジェット取得地域履歴一覧テーブルへデータを挿入する -->
+	<entry key="sql_update_table_for_w_location">
+		UPDATE t_widget_locale_history SET
+			update_count = ?
+			, gps_flag = ?
+			, latitude = (SELECT latitude FROM m_p_locality WHERE v_locality_name = ?)
+			, longitude = (SELECT longitude FROM m_p_locality WHERE v_locality_name = ?)
+			, country_name_code_id = (SELECT id FROM m_country WHERE country_name_code = ?)
+			, administrative_area_name_id = (SELECT id FROM m_p_administrative_area WHERE administrative_area_name = ?)
+			, sub_administrative_area_name = (
+					SELECT MPSAA.sub_administrative_area_name
+					FROM m_p_sub_administrative_area MPSAA, m_p_locality MPL
+					WHERE MPSAA.id = MPL.parent_sub_administrative_area_id
+						AND MPL.v_locality_name = ?
+			  )
+			, locality_name = (SELECT locality_name FROM m_p_locality WHERE v_locality_name = ?)
+			, update_date = ?
+		WHERE widget_id = ?;
+	</entry>
+
+		<!-- WidgetIDを指定して、ウィジェット取得地域履歴一覧テーブルへデータを挿入する【海外の天気予報の場合】 -->
+	<entry key="sql_update_table_for_w_foreign_location">
+		UPDATE t_widget_locale_history SET
+			update_count = ?
+			, gps_flag = ?
+			, latitude = (SELECT latitude FROM m_p_foreign_city WHERE city_name = ?)
+			, longitude = (SELECT longitude FROM m_p_foreign_city WHERE city_name = ?)
+			, country_name_code_id = (SELECT id FROM m_country WHERE country_name_code = ?)
+			, administrative_area_name_id = NULL
+			, sub_administrative_area_name = NULL
+			, locality_name = (SELECT city_name FROM m_p_foreign_city WHERE city_name = ?)
+			, update_date = ?
+		WHERE widget_id = ?;
+	</entry>
+	
+	<!-- 国名コード検索 -->
+	<entry key="sql_select_country_name_code_by_widget_id">
+		SELECT
+			MC.country_name_code
+		FROM
+			t_widget_locale_history TWLH
+			, m_country MC
+		WHERE
+			TWLH.country_name_code_id = MC.id
+			AND TWLH.widget_id = ?;
+	</entry>
+	
+	<!-- ウィジェットID指定検索(兼部分sql) -->
+	<entry key="sql_select_by_widget_id">
+		SELECT
+			TWLH.widget_id, TWLH.json_id, TWLH.update_count
+			, TWLH.gps_flag, TWLH.latitude, TWLH.longitude
+			, TWLH.accuracy, MC.country_name_code, MC.country_name
+			, MPAA.administrative_area_name, TWLH.sub_administrative_area_name, TWLH.locality_name
+			, TWLH.update_date, TWLH.registration_date
+		FROM
+			t_widget_locale_history TWLH
+			, m_country MC
+			, m_p_administrative_area MPAA
+		WHERE
+			TWLH.country_name_code_id = MC.id
+			AND TWLH.administrative_area_name_id = MPAA.id
+			AND TWLH.widget_id = ?;
+	</entry>
+
+	<!-- ウィジェットID指定検索(兼部分sql)：海外用 -->
+	<entry key="sql_select_by_widget_id_for_foreign_country">
+		SELECT
+			TWLH.widget_id, TWLH.json_id, TWLH.update_count
+			, TWLH.gps_flag, TWLH.latitude, TWLH.longitude
+			, TWLH.accuracy, MC.country_name_code, MC.country_name
+			, TWLH.locality_name, TWLH.update_date, TWLH.registration_date
+		FROM
+			t_widget_locale_history TWLH
+			, m_country MC
+		WHERE
+			TWLH.country_name_code_id = MC.id
+			AND TWLH.widget_id = ?;
+	</entry>
+		
+	<!-- 全件検索(兼部分sql) -->
+	<entry key="sql_select_all_widgets">
+		SELECT
+			TWLH.widget_id, TWLH.json_id, TWLH.update_count
+			, TWLH.gps_flag, TWLH.latitude, TWLH.longitude
+			, TWLH.accuracy, MC.country_name_code, MC.country_name
+			, MPAA.administrative_area_name, TWLH.sub_administrative_area_name, TWLH.locality_name
+			, MPL.v_locality_name, TWLH.update_date, TWLH.registration_date
+		FROM
+			t_widget_locale_history TWLH
+			, m_country MC
+			, m_p_administrative_area MPAA
+			, m_p_locality MPL
+		WHERE
+			TWLH.country_name_code_id = MC.id
+			AND TWLH.administrative_area_name_id = MPAA.id
+			AND TWLH.locality_name = MPL.locality_name
+	</entry>
+
+	<!-- 海外ウィジェットの全件検索(兼部分sql) -->
+	<entry key="sql_select_all_foreign_widgets">
+		SELECT
+			TWLH.widget_id, TWLH.json_id, TWLH.update_count
+			, TWLH.gps_flag, TWLH.latitude, TWLH.longitude
+			, TWLH.accuracy, MC.country_name_code, MC.country_name
+			, TWLH.sub_administrative_area_name, TWLH.locality_name
+			, MPFC.v_city_name, TWLH.update_date, TWLH.registration_date
+		FROM
+			t_widget_locale_history TWLH
+			, m_country MC
+			, m_p_foreign_city MPFC
+		WHERE
+			TWLH.country_name_code_id = MC.id
+			AND TWLH.locality_name = MPFC.city_name
+	</entry>
+	
+	<!-- 全件削除(兼部分sql) -->
+	<entry key="sql_delete_table">
+		DELETE FROM t_widget_locale_history
+	</entry>
+	
+	<!-- 都道府県一覧の取得 -->
+	<entry key="sql_select_a_a_name_by_c_n_code">
+		SELECT
+			MPA.administrative_area_name
+		FROM
+			m_p_administrative_area MPA, m_country MC
+		WHERE
+			MC.country_name_code = ?
+	</entry>
+	
+	<!-- 市区町村名一覧の取得 -->
+	<entry key="sql_select_loc_name_by_a_a_name">
+		SELECT
+			MPAA.administrative_area_name, MPL.v_locality_name
+		FROM
+			m_p_locality MPL, m_p_administrative_area MPAA
+		WHERE
+			MPL.parent_administrative_area_id = MPAA.id
+			AND MPAA.administrative_area_name = ?;
+	</entry>
+
+	<!-- テーブルの削除 -->
+	<entry key="sql_drop_table">
+		DROP TABLE IF EXISTS t_widget_locale_history;
+	</entry>
+	
+	<!-- テーブルのレコード数カウント -->
+	<entry key="sql_count_all_raw">
+	    SELECT COUNT(*) FROM t_widget_locale_history;
+	</entry>
+</properties>

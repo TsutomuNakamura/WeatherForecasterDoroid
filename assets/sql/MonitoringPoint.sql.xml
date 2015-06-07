@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<properties>
+	<comment>MonitoringPoint に関するsql</comment>
+	<!-- 緯度と経度からデータを検索する -->
+	<entry key="sql_select_by_latitude_and_longitude">
+		SELECT
+			MPL.latitude, MPL.longitude, MC.country_name_code, MC.country_name
+			, MPR.region_name, MPAA.administrative_area_name, MPL.locality_name
+			, MPL.v_locality_name, MPL.rss_url
+		FROM
+			m_p_locality MPL, m_country MC, m_p_region MPR
+			, m_p_administrative_area MPAA, m_p_locality MPL
+		WHERE
+			MPL.parent_administrative_area_id = MPAA.id
+			AND MPAA.parent_id = MPR.id
+			AND MPR.parent_id = MC.id
+			AND MPL.latitude = ?
+			AND MPL.longitude = ?
+		;
+	</entry>
+	
+	<!-- 国コードと都道府県名から気象観測地点を検索するSQL(複数ヒットが想定される) -->
+	<entry key="sql_select_by_administrative_area_name">
+	SELECT
+		MPL.latitude, MPL.longitude, MC.country_name_code, MC.country_name
+		, MPR.region_name, MPAA.administrative_area_name
+		, MPL.locality_name, MPL.v_locality_name, MPL.rss_url
+	FROM
+		m_p_locality MPL, m_country MC, m_p_region MPR
+		, m_p_administrative_area MPAA
+	WHERE
+		MPL.parent_administrative_area_id = MPAA.id
+		AND MPAA.parent_id = MPR.id
+		AND MPR.parent_id = MC.id
+		AND MC.country_name_code = ?
+		AND MPAA.administrative_area_name = ?
+	;
+	</entry>
+	
+	<!-- 緯度と経度を検索 -->
+	<entry key="sql_select_latitude_and_longitude">
+	SELECT latitude, longitude
+	FROM m_country MC, m_p_region MPR, m_p_administrative_area MPAA, m_p_locality MPL
+	WHERE MC.id = MPR.parent_id
+		AND MPR.id = MPAA.parent_id
+		AND MPAA.id = MPL.parent_administrative_area_id
+		AND MC.country_name_code = ?
+		AND MPAA.administrative_area_name = ?
+		AND MPL.v_locality_name = ?
+	</entry>
+	
+</properties>

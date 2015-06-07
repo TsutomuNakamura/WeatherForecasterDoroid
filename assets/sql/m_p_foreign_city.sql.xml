@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<properties>
+	<comment>m_p_foreign_city に関するsql</comment>
+	<!-- テーブルの作成 -->
+	<entry key="sql_create_table">
+		CREATE TABLE IF NOT EXISTS m_p_foreign_city(
+			id INTEGER PRIMARY KEY AUTOINCREMENT
+			, country_name_code TEXT NOT NULL
+			, latitude REAL NOT NULL
+			, longitude REAL NOT NULL
+			, city_name TEXT NOT NULL
+			, v_city_name TEXT NOT NULL
+			, update_date TEXT
+			, registration_date TEXT
+			, FOREIGN KEY(country_name_code) REFERENCES m_country(country_name_code)
+		);
+	</entry>
+
+	<!-- 国名からコード都市名一覧を取得する -->
+	<entry key="sql_select_foreign_loc_name_by_c_n_code">
+		SELECT FC.city_name
+		FROM m_p_foreign_city FC
+		WHERE country_name_code = ?;
+	</entry>
+		
+	<!-- データ挿入 -->
+	<entry key="sql_insert_table">
+	    INSERT INTO m_p_foreign_city(
+			id, country_name_code, latitude, longitude, city_name, v_city_name, update_date, registration_date
+		) VALUES (
+			?, ?, ?, ?, ?, ?, ?, ?
+		);
+	</entry>
+	
+	<!-- テーブルの削除 -->
+	<entry key="sql_drop_table">
+		DROP TABLE IF EXISTS m_p_foreign_city;
+	</entry>
+</properties>

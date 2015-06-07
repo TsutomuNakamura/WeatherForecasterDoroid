@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical" android:layout_width="fill_parent"
+	android:layout_height="fill_parent">
+
+	<TextView
+	    	android:id="@+id/monitoring_point_label"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textSize="24sp"
+	/>
+	<TextView
+	    	android:id="@+id/widget_id_and_location_type"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textSize="13sp"
+	/>
+	
+	<View android:id="@+id/Separator" 
+			android:layout_width="wrap_content" 
+			android:layout_height="1px"
+			android:background="#414141" 
+			android:layout_marginBottom="1dip"
+    />
+	
+	<ListView
+			android:id="@+id/android:list"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+	/>
+	<TextView
+			android:id="@+id/android:empty"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="週間天気予報が取得できません"
+	/>
+	
+	<View android:id="@+id/Separator" 
+			android:layout_width="wrap_content" 
+			android:layout_height="1px"
+			android:background="#414141" 
+			android:layout_marginBottom="1dip"
+    />
+</LinearLayout>

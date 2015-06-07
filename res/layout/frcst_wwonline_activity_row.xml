@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" >
+    
+    <ImageView android:id="@+id/WeatherIcon"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="0dip"
+			android:layout_marginLeft="5dip"
+			android:paddingTop="10dip"
+    />
+    
+    <TextView
+	        android:id="@+id/StringDate"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:textSize="15sp"
+	        android:layout_marginLeft="2dip"
+	        android:layout_toRightOf="@+id/WeatherIcon"
+	        android:layout_alignTop="@+id/WeatherIcon"
+    />
+    
+    <TextView
+    		android:id="@+id/StringDayOfWeek"
+    		android:layout_width="wrap_content"
+    		android:layout_height="wrap_content"
+    		android:textSize="15dip"
+    		android:layout_toRightOf="@+id/StringDate"
+    		android:layout_alignTop="@+id/StringDate"
+    />
+    <TextView
+    		android:id="@+id/StringWeather"
+    		android:layout_width="wrap_content"
+    		android:layout_height="wrap_content"
+    		android:minWidth="132dip"
+    		android:textSize="15sp"
+    		android:layout_below="@+id/StringDate"
+    		android:layout_alignLeft="@+id/StringDate"
+    />
+    <TextView
+    		android:id="@+id/TempMaxLabel"
+    		android:layout_width="wrap_content"
+    		android:layout_height="wrap_content"
+    		android:textSize="14sp"
+    		android:layout_below="@+id/StringWeather"
+    		android:layout_alignLeft="@+id/StringWeather"
+    		android:text="最高:"
+    />
+    <TextView
+    		android:id="@+id/TempMax"
+    		android:layout_width="wrap_content"
+    		android:layout_height="wrap_content"
+    		android:textSize="14sp"
+    		android:textColor="#FF6666"
+    		android:layout_toRightOf="@+id/TempMaxLabel"
+    		android:layout_alignTop="@+id/TempMaxLabel"
+    />
+    <TextView
+    		android:id="@+id/TempMinLabel"
+    		android:layout_width="wrap_content"
+    		android:layout_height="wrap_content"
+    		android:textSize="14sp"
+    		android:layout_toRightOf="@+id/TempMax"
+    		android:layout_alignTop="@+id/TempMax"
+    		android:text="℃ 最低:"
+    />
+    <TextView
+    		android:id="@+id/TempMin"
+    		android:layout_width="wrap_content"
+    		android:layout_height="wrap_content"
+    		android:textSize="14sp"
+    		android:textColor="#7777FF"
+    		android:layout_toRightOf="@+id/TempMinLabel"
+    		android:layout_alignTop="@+id/TempMinLabel"
+    />
+    <TextView
+    		android:id="@+id/TempMinSuffix"
+    		android:layout_width="wrap_content"
+    		android:layout_height="wrap_content"
+    		android:textSize="14sp"
+    		android:layout_toRightOf="@+id/TempMin"
+    		android:layout_alignTop="@+id/TempMin"
+    		android:text="℃"
+    />
+    
+    <TextView
+        	android:id="@+id/WindDir"
+        	android:layout_width="fill_parent"
+        	android:layout_height="wrap_content"
+        	android:textSize="16sp"
+        	android:layout_toRightOf="@+id/StringWeather"
+        	android:layout_alignTop="@+id/StringWeather"
+    />
+    <TextView
+    		android:id="@+id/WindSpeed"
+    		android:layout_width="wrap_content"
+    		android:layout_height="wrap_content"
+    		android:textSize="14sp"
+    		android:layout_below="@+id/WindDir"
+    		android:layout_alignLeft="@+id/WindDir"
+    />
+
+    
+</RelativeLayout>

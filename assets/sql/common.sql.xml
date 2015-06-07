@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<properties>
+	<!-- テーブルの削除 -->
+	<entry key="sql_drop_table">
+		DROP TABLE IF EXISTS ?;
+	</entry>
+	
+	<!-- テーブルのレコード数カウント -->
+	<entry>
+	    COUNT(*) FROM ?;
+	</entry>
+</properties>

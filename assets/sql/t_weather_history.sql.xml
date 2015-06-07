@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<properties>
+	<comment>t_weather_history に関するsql</comment>
+	<!-- テーブルの作成 -->
+	<entry key="sql_create_table">
+	    CREATE TABLE IF NOT EXISTS t_weather_history(
+	    	announce_date TEXT NOT NULL
+	    	, weather_date TEXT NOT NULL
+	    	, weather_day_of_week INTEGER NOT NULL
+	    	, widget_id INTEGER NOT NULL
+	    	, weather_string TEXT NOT NULL
+	    	, weather_icon_id INTEGER NOT NULL
+	    	, highest_temperature INTEGER
+	    	, lowest_temperature INTEGER
+	    	, chance_of_rain TEXT
+	    	, wind_direction TEXT
+	    	, wind_speed INTEGER
+	    	, comment_country_id INTEGER
+	    	, comment_administrative_area_id INTEGER
+	    	, update_date TEXT
+	    	, registration_date TEXT
+	    	, PRIMARY KEY(announce_date, weather_date, weather_day_of_week, widget_id)
+	    	, FOREIGN KEY (widget_id) REFERENCES t_widget_locale_history (widget_id)
+	    	, FOREIGN KEY (comment_country_id) REFERENCES t_woc_weather_comment (country_id)
+	    	, FOREIGN KEY (comment_administrative_area_id) REFERENCES t_adar_weather_comment (administrative_area_id)
+	    );
+	</entry>
+	
+	<!-- 気象予報データ履歴更新用SQL -->
+	<entry key="sql_ins_or_rep_table">
+		INSERT OR REPLACE INTO t_weather_history(
+			announce_date, weather_date, weather_day_of_week
+			, widget_id, weather_string, weather_icon_id
+			, highest_temperature, lowest_temperature, chance_of_rain
+			, wind_direction, wind_speed, comment_country_id
+			, comment_administrative_area_id, update_date, registration_date
+		) VALUES (
+			?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+			, (SELECT id FROM m_country WHERE country_name_code = ?)
+			, (SELECT id FROM m_p_administrative_area WHERE administrative_area_name = ?)
+			, ?, ?
+		);
+	</entry>
+	
+	<!-- 最近の気象予報一覧を取得する(国内用) -->
+	<entry key="sql_select_by_w_id_and_n_a_date">
+		SELECT TWH.announce_date, TWH.weather_date, TWH.weather_day_of_week
+			, TWH.weather_string, TWH.weather_icon_id, TWH.highest_temperature
+			, TWH.lowest_temperature, TWH.chance_of_rain, TWH.wind_direction
+			, TWH.wind_speed, TWWC.weather_comment, TWWC.announce_date
+			, TAWC.weather_comment, TAWC.announce_date
+		FROM t_weather_history TWH, t_woc_weather_comment TWWC, t_adar_weather_comment TAWC
+		WHERE TWH.comment_country_id = TWWC.country_id
+			AND TWH.comment_administrative_area_id = TAWC.administrative_area_id
+			AND TWH.announce_date = (
+				SELECT DISTINCT announce_date
+				FROM t_weather_history
+				WHERE widget_id = ?
+				GROUP BY announce_date
+				ORDER BY announce_date DESC
+				LIMIT 1
+				OFFSET 0)
+			AND TWWC.country_id = (SELECT id FROM m_country WHERE country_name_code = ?)
+			AND TAWC.administrative_area_id = (SELECT id FROM m_p_administrative_area WHERE administrative_area_name = ?)
+			AND TWH.widget_id = ?
+		ORDER BY TWH.weather_date ASC;
+	</entry>
+	
+	<!-- 最近の気象予報一覧を取得する(海外用) -->
+	<entry key="sql_select_foreign_by_w_id_and_n_a_date">
+		SELECT
+			TWH.announce_date, TWH.weather_date
+			, TWH.weather_day_of_week, TWH.weather_string
+			, TWH.weather_icon_id, TWH.highest_temperature
+			, TWH.lowest_temperature, TWH.chance_of_rain
+			, TWH.wind_direction, TWH.wind_speed
+		FROM
+			t_weather_history TWH
+		WHERE
+			TWH.announce_date = (
+				SELECT DISTINCT announce_date
+				FROM t_weather_history
+				WHERE widget_id = ?
+				GROUP BY announce_date
+				ORDER BY announce_date DESC
+				LIMIT 1
+				OFFSET 0
+			)
+			AND TWH.widget_id = ?
+		ORDER BY
+			TWH.weather_date ASC;
+	</entry>
+	
+	<!-- 指定した日付より古いデータの削除 -->
+	<entry key="sql_delete_by_time"> 
+		DELETE FROM t_weather_history WHERE announce_date &lt; ?;
+	</entry>
+	
+	<!-- テーブルの削除 -->
+	<entry key="sql_drop_table">
+		DROP TABLE t_weather_history;
+	</entry>
+	<!-- テーブルのレコード数カウント -->
+	<entry key="sql_count_all_data">
+	    COUNT(*) FROM t_weather_history;
+	</entry>
+</properties>

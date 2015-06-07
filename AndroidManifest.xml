@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+	  package="jp.co.teraintl.g12011.wforecasterd.wforecast.cnvi"
+	  android:versionCode="1"
+	  android:versionName="1.0">
+	<uses-sdk android:minSdkVersion="8" />
+
+	<!-- GPS による位置情報取得の許可 -->
+	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+	<!-- WiFi網等を利用してGPS 情報を取得する場合のパーミッション -->
+	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+	<!-- インターネットへの接続を許可する -->
+	<uses-permission android:name="android.permission.INTERNET" />
+
+	<!-- Android アプリケーションアイコン -->
+	<application android:icon="@drawable/icon" android:label="@string/app_name">
+	
+		<!-- ウィジェットを登録する -->
+		<receiver android:name=".FrcstMtrlgWidget" android:label="@string/app_name">
+			<intent-filter>
+				<!-- ウィジェットの更新を通知するブロードキャストを受信する設定 -->
+				<action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+			</intent-filter>
+			<meta-data android:name="android.appwidget.provider"
+					android:resource="@xml/appwidget" />
+		</receiver>
+		
+		<!-- ウィジェット管理用サービスクラスの定義 -->
+		<service android:name=".FrcstMtrlgService" />
+		
+		<!-- ウィジェットフリック時の詳細画面 -->
+		<activity android:name=".FrcstMtrlgActivity" android:label="@string/activity_label_weather_activity_label" />
+		<!-- 地域設定画面 -->
+		<activity android:name=".AreaChoserActivity" android:label="@string/activity_label_chose_area" />
+		<!-- 海外地域設定画面 -->
+		<activity android:name=".ForeignAreaChoserActivity" android:label="@string/activity_label_foreign_chose_area" />
+	</application>
+</manifest>

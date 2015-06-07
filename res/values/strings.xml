@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- アプリケーション名 -->
+	<string name="app_name">気象予報士ドロイド君</string>
+	
+	<!--
+		気象情報を提供するプロバイダを定義する
+		1:ウェザーマップ(一口天気予報RSS)
+		2:WorldWeatherOnline
+	-->
+	<string name="weather_provider_default">2</string>
+	
+	<!-- 地域情報デフォルト値 -->
+	<string name="gps_default_latitude">35.689456</string>
+	<string name="gps_default_longitude">139.691498</string>
+	<string name="location_default_json_id">DefaultJsonId</string>
+	<string name="location_default_accuracy">-1</string>
+	<string name="location_default_country_name_code">JP</string>
+	<string name="location_default_country_name">日本</string>
+	<string name="location_default_administrative_area_name">東京都</string>
+	<string name="location_default_sub_administrative_area_name"></string>
+	<string name="location_default_locality_name">新宿区</string>
+	<string name="location_default_gps_flag">true</string>
+	
+	<!-- 新生ウィジェット寿命(上限更新回数) -->
+	<string name="life_span_of_baby_widget">10</string>
+	<!-- 新生ウィジェット寿命、新生/恒常更新ウィジェットの更新間隔の設定【分単位指定】 -->
+	<string name="interval_baby_widget">1</string>
+	<!-- 恒常的にウィジェットを更新する間隔 -->
+	<string name="interval_constant_widget">120</string>
+	
+	<!-- WorldWeatherOnline クレジット表示関連 -->
+	<string name="authors_wwonline_credit_subject">Powered by:</string>
+	<string name="authors_wwonline_credit">World Weather Online</string>
+	
+		
+	<!-- Http クライアント関連の設定値(Goole maps API) -->
+	<string name="url_scheme_http">http</string>
+	<string name="http_request_interval">10000</string>
+	<string name="http_request_num">5</string>    
+	
+	<!-- Http クライアント関連の設定値(Goole maps API) -->
+	<string name="url_geo_authority">maps.google.com</string>
+	<string name="url_geo_path">/maps/geo</string>
+	<string name="url_geo_queryParamKey_ll">ll</string>
+	
+	<string name="url_geo_queryParamKey_output">output</string>
+	<string name="url_geo_queryParamValue_output">json</string>
+	
+	<string name="url_geo_queryParamKey_apikey">key</string>
+	
+	<string name="url_geo_queryParamKey_hl">hl</string>
+	<string name="url_geo_queryParamValue_hl">ja</string>
+	
+	<string name="url_geo_queryparamkey_oe">oe</string>
+	<string name="url_geo_queryParamValue_oe">UTF8</string>
+	
+	<!-- Http クライアント関連の設定値(World weather online) -->
+	<string name="url_authorigy_free_wwo">api.worldweatheronline.com</string>
+	<string name="url_free_wwo_path">/free/v1/weather.ashx</string>
+	<string name="url_free_wwo_query_param_key_latlon">q</string>
+	<string name="url_free_wwo_query_param_key_format">format</string>
+	<string name="url_free_wwo_query_param_value_format_json">json</string>
+	<string name="url_free_wwo_query_param_key_num_of_days">num_of_days</string>
+	<string name="url_free_wwo_query_param_value_num_of_days_5">5</string>
+	<string name="url_free_wwo_query_param_key_api_key">key</string>
+	<string name="url_free_wwo_query_param_value_api_key">9eb5eb2e3b2143138ca2517c1c96d1e0ec247a2d</string>
+	
+	<!-- 気象予報RSSのネームスペース接頭辞 -->
+	<string name="rss_ns_uri_pfx_wm">wm</string>
+	
+	<!-- DBのバージョン -->
+	<string name="database_version">5</string>
+	<string name="database_name">wfdoroidb</string>
+	
+	<!-- テーブル名一覧 -->
+	<string name="t_widget_locale_history">t_widget_locale_history</string>
+	<string name="m_country">m_country</string>
+	<string name="m_p_region">m_p_region</string>
+	<string name="m_p_administrative_area">m_p_administrative_area</string>
+	<string name="m_p_sub_administrative_area">m_p_sub_administrative_area</string>
+	<string name="m_p_locality">m_p_locality</string>
+	<string name="m_p_foreign_city">m_p_foreign_city</string>
+	<string name="t_weather_history">t_weather_history</string>
+	<string name="t_adar_weather_comment">t_adar_weather_comment</string>
+	<string name="t_woc_weather_comment">t_woc_weather_comment</string>
+	
+	<!-- 各SQLファイルの定義 -->
+	<string name="assets_sql_t_widget_locale_history">sql/t_widget_locale_history.sql.xml</string>
+	<string name="assets_sql_m_country">sql/m_country.sql.xml</string>
+	<string name="assets_sql_m_p_region">sql/m_p_region.sql.xml</string>
+	<string name="assets_sql_m_p_administrative_area">sql/m_p_administrative_area.sql.xml</string>
+	<string name="assets_sql_m_p_sub_administrative_area">sql/m_p_sub_administrative_area.sql.xml</string>
+	<string name="assets_sql_m_p_locality">sql/m_p_locality.sql.xml</string>
+	<string name="assets_sql_m_p_foreign_city">sql/m_p_foreign_city.sql.xml</string>
+	<string name="assets_sql_monitoring_point">sql/MonitoringPoint.sql.xml</string>
+	<string name="assets_sql_common">sql/common.sql.xml</string>
+	<string name="assets_sql_t_weather_history">sql/t_weather_history.sql.xml</string>
+	<string name="assets_sql_t_woc_weather_comment">sql/t_woc_weather_comment.sql.xml</string>
+	<string name="assets_sql_t_adar_weather_comment">sql/t_adar_weather_comment.sql.xml</string>
+	
+	<!-- テーブル初期値設定CSVファイル一覧 -->
+	<string name="assets_csv_t_widget_locale_history">table/default/t_widget_locale_history.csv</string>
+	<string name="assets_csv_m_country_default">table/default/m_country_default.csv</string>
+	<string name="assets_csv_m_p_region_default">table/default/m_p_region_default.csv</string>
+	<string name="assets_csv_m_p_administrative_area_default">table/default/m_p_administrative_area_default.csv</string>
+	<string name="assets_csv_m_p_sub_administrative_area_default">table/default/m_p_region_default.csv</string>
+	<string name="assets_csv_m_p_locality_default">table/default/m_p_locality_default.csv</string>
+	
+	<!-- WorldWeatherOnline の天気予報定義ファイル -->
+	<string name="assets_data_wwonline_weather_code_ja">data/WWOnlineConditionCodeJa.txt</string>
+	
+	<!-- ウィジェットフリック時の詳細画面関係 -->
+	<string name="activity_label_weather_activity_label">天気概況</string>
+	<string name="activity_label_chose_area">地域設定</string>
+	<string name="activity_label_foreign_chose_area">海外地域設定</string>
+	
+	<!-- インテント関連 -->
+	<string name="intent_extra_widget_id">widget_id</string>
+	<string name="intent_extra_country_name_code">country_name_code</string>
+	<string name="intent_extra_country_name">country_name</string>
+	<string name="intent_extra_administrative_area_name">administrative_area_name</string>
+	<string name="intent_extra_locality_name">locality_name</string>
+	<string name="intent_extra_load_last_ref_location_flg">load_last_ref_location</string>
+	
+	<!-- DBクリーンアップ関連の設定値 -->
+	<string name="interval_db_cleanup">2 * 1000 * 60 * 60 * 24</string>
+	<string name="interspace_date">3</string>
+	
+	<!-- パッケージ名 -->
+	<string name="name_package_cnvi">jp.co.teraintl.g12011.wforecasterd.wforecast.cnvi</string>
+</resources>

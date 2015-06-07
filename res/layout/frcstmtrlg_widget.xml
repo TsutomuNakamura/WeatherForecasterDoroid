@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    	android:id="@+id/widget_base"
+		xmlns:android="http://schemas.android.com/apk/res/android"
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:padding="0dip"
+		>
+    <ImageView android:layout_height="wrap_content"
+    		android:layout_width="wrap_content"
+    		android:src="@drawable/background_widget"
+    />
+    
+    <!-- 都道府県名 -->
+    <TextView android:id="@+id/TextAdministrativeAreaName"
+    		android:layout_width="wrap_content"
+    		android:layout_height="wrap_content"
+    		android:textSize="15dip"
+    		android:layout_marginTop="3dip"
+    		android:layout_marginLeft="4dip"
+			android:minWidth="33dip"
+			android:minHeight="16dip"
+			android:textColor="#FFFFFF"
+    />
+    <!-- 地域名 -->
+    <TextView android:id="@+id/TextLocalityName"
+    		android:layout_width="wrap_content"
+    		android:layout_height="wrap_content"
+    		android:textSize="15dip"
+    		android:layout_marginTop="1dip"
+    		android:layout_marginLeft="0dip"
+			android:layout_below="@+id/TextAdministrativeAreaName"
+			android:layout_alignLeft="@+id/TextAdministrativeAreaName"
+    		android:minWidth="33dip"
+    		android:minHeight="16dip"
+			android:textColor="#FFFFFF"
+    />
+    
+	<!-- ★☆ 全体の背景を黒くするデザインVer ★☆ -->
+	<!-- 日付 -->
+	<TextView android:id="@+id/TextTodaysDate"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textSize="10dip"
+			android:layout_marginTop="1dip"
+			android:layout_marginLeft="0dip"
+			android:layout_below="@+id/TextLocalityName"
+			android:layout_alignLeft="@+id/TextLocalityName"
+			android:minWidth="28dip"
+			android:minHeight="16dip"
+			android:textColor="#FFFFFF"
+	/>
+	<!-- 今日の最高気温 -->
+	<TextView android:id="@+id/TextTodaysHighestTemperature"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textColor="#FF6666"
+			android:layout_below="@+id/TextTodaysDate"
+			android:layout_alignLeft="@+id/TextTodaysDate"
+			android:textSize="10dip"
+			android:minWidth="32dip"
+			android:minHeight="14dip"
+			
+	/>
+	<!-- 今日の最低気温 -->
+	<TextView android:id="@+id/TextTodaysLowestTemperature"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textColor="#7777FF"
+			android:layout_below="@+id/TextTodaysHighestTemperature"
+			android:layout_alignLeft="@+id/TextTodaysHighestTemperature"
+			android:textSize="10dip"
+			android:minWidth="32dip"
+			android:minHeight="14dip"
+	/>
+	<!-- 今日の気象予報イメージ -->
+	<ImageView android:id="@+id/ImageTodaysWeather"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_toRightOf="@+id/TextTodaysDate"
+			android:layout_alignTop="@+id/TextTodaysDate"
+			android:layout_marginTop="2dip"
+			android:layout_marginLeft="0dip"
+			android:focusable="true"
+	/>
+		
+</RelativeLayout>
