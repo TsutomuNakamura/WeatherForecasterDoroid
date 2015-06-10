@@ -1,8 +1,10 @@
 # 気象予報士ドロイド君 #
 課題用Android アプリケーション気象予報士ドロイド君のソースリポジトリです。
 
-![ウィジェット表示の様子](wiki/img/doroidkun01.png)
-![天気一覧](wiki/img/doroidkun02.png)
+![ウィジェット表示の様子](https://github.com/TsutomuNakamura/WeatherForecasterDoroid/wiki/img/doroidkun01.png)
+![天気一覧](https://github.com/TsutomuNakamura/WeatherForecasterDoroid/wiki/img/doroidkun01.png)
+
+https://github.com/TsutomuNakamura/WeatherForecasterDoroid/wiki/img/doroidkun01.png
 
 #* リポジトリ概要  
 Android のウィジェットでドロイド君が気象予報をしてくれるアプリケーションです。
