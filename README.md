@@ -1,36 +1,18 @@
 # 気象予報士ドロイド君 #
 課題用Android アプリケーション気象予報士ドロイド君のソースリポジトリです。
 
+![ウィジェット表示の様子](https://github.com/TsutomuNakamura/WeatherForecasterDoroid/wiki/img/doroidkun01.png)
+![天気一覧](https://github.com/TsutomuNakamura/WeatherForecasterDoroid/wiki/img/doroidkun02.png)
+
 #* リポジトリ概要  
 Android のウィジェットでドロイド君が気象予報をしてくれるアプリケーションです。
-これは課題制となっており、プログラミング初心者が実際に動くAndroid アプリケーションを体験しながら、プログラムのソースコードに触るハンズオン形式を目指しています。  
-課題を解きながらAndroid プログラミングの初めの一歩を踏み出しましょう。
-
-#* Version  
-0.1
+これは課題制となっており、プログラミング初心者が実際に動くAndroid アプリケーションを体験しながら、プログラムのソースコードに触るハンズオン形式となっています。
+課題を解きながらAndroid プログラミングを体験してみましょう。
 
 # セットアップについて
-## とりあえずソースコードがほしい場合
-ソースコードはgit リポジトリで管理されています。
-とりあえずソースコードのみほしい場合は次のコマンドでサンプルソースコードを取得することができます。
-```
-$ git clone https://TsutomuNakamura@bitbucket.org/TsutomuNakamura/weatherforecasterdoroid.git
-```
 
-## eclipse について
-このリポジトリのソースはeclipse で開発されることを想定しています。
-2014/09/08 現在、下記のサイトからダウンロードしたEclipse ADT(with the Android SDK for Windows) を使用してください。その他のeclipse についても、問題なく使用できるはずですが、動作確認まではしていません。
-```
+## Android Studio について
 http://developer.android.com/sdk/index.html
-```
-
-Eclipse にてGit clone を行い、ソースコードを取得してください。
-```
-URI:
-https://TsutomuNakamura@bitbucket.org/TsutomuNakamura/weatherforecasterdoroid.git
-```
-
-動作確認しているAndroid のAPI バージョンは2.3.3 です。
 
 ## 課題について
 次のような課題を考案中
@@ -55,6 +37,6 @@ WorldWeatherOnline の場合は5 日まで表示できるので、そのよう�
 よほど余裕がある人向け
 
 ## 気象予報情報の取得先について
-WORLD WEATHER ONLINE
+WORLD WEATHER ONLINE<br />
  http://www.worldweatheronline.com/
 
