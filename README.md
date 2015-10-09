@@ -40,3 +40,5 @@ WorldWeatherOnline の場合は5 日まで表示できるので、そのよう�
 WORLD WEATHER ONLINE<br />
  http://www.worldweatheronline.com/
 
+## Copyright
+このページの内容の一部は、Google が作成、提供しているコンテンツをベースに複製したもので、クリエイティブ・コモンズの表示 3.0 ライセンスに記載の条件に従って使用しています。
